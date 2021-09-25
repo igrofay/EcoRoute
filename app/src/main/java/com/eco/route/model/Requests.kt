@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 object Requests {
-    private const val MAIN_URL =""
+    private const val MAIN_URL ="https://c3f5-95-105-127-103.ngrok.io/api/sensorsdata/"
     private val retrofitInstance: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(MAIN_URL)

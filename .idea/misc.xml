@@ -3,12 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidSrudioProjects/EcoRoute/app/src/main/res/layout/activity_main.xml" value="0.16354166666666667" />
-        <entry key="..\:/AndroidSrudioProjects/EcoRoute/app/src/main/res/layout/fragment_maps.xml" value="0.16354166666666667" />
         <entry key="..\:/Users/igrof/AndroidStudioProjects/Ecoroute/app/src/main/res/layout/activity_main.xml" value="0.13272543059777103" />
         <entry key="..\:/Users/igrof/AndroidStudioProjects/Ecoroute/app/src/main/res/layout/activity_welcome.xml" value="0.13272543059777103" />
         <entry key="..\:/Users/igrof/AndroidStudioProjects/Ecoroute/app/src/main/res/layout/fragment_maps.xml" value="0.12588652482269502" />
         <entry key="..\:/Users/igrof/AndroidStudioProjects/Ecoroute/app/src/main/res/layout/fragment_welcome.xml" value="0.13272543059777103" />
+        <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_bottom_data_street.xml" value="0.28306159420289856" />
+        <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.25" />
         <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_maps.xml" value="0.2957427536231884" />
       </map>
     </option>
