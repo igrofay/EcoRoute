@@ -30,7 +30,8 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_maps, container, false)
+        binding = FragmentMapsBinding.inflate(inflater , container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,6 +48,9 @@ class MapsFragment : Fragment() {
                 Manifest.permission.ACCESS_FINE_LOCATION)
         }else{
             startMap()
+        }
+        binding.button2.setOnClickListener {
+            model.startEcoMap()
         }
     }
 
