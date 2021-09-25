@@ -1,5 +1,6 @@
 package com.eco.route.feature.map
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -7,6 +8,9 @@ import android.graphics.Color
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
+import com.eco.route.R
+import com.eco.route.feature.app.App
+import com.eco.route.feature.app.showToast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -14,20 +18,16 @@ import com.google.android.gms.maps.model.*
 import com.google.maps.android.heatmaps.Gradient
 import com.google.maps.android.heatmaps.HeatmapTileProvider
 
-class WorkMaps(var context: Context) : OnMapReadyCallback {
+class WorkMaps : OnMapReadyCallback {
     private lateinit var googleMap: GoogleMap
     override fun onMapReady(gMap: GoogleMap) {
         googleMap = gMap
-        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, com.eco.route.R.raw.style_json))
-
+        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(App.appContext , R.raw.style_json))
         googleMap.uiSettings.isCompassEnabled = true
         googleMap.isBuildingsEnabled = true
 
         val poiListener = GoogleMap.OnPoiClickListener {
-            Toast.makeText(
-                context, it.name,
-                Toast.LENGTH_SHORT
-            ).show()
+            showToast(it.name)
         }
 
         val markerListener = GoogleMap.OnMarkerClickListener {
