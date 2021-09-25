@@ -16,7 +16,6 @@ class MapViewModel : ViewModel() {
 
 
     fun startEcoMap(){
-
         for (i in 1..5){
             viewModelScope.launch {
                 val response = repository.getZones(i)

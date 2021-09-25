@@ -10,6 +10,7 @@ android {
         viewBinding true
     }
 
+
     defaultConfig {
         applicationId "com.eco.route"
         minSdk 21
