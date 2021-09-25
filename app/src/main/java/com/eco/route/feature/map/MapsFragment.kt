@@ -61,10 +61,11 @@ class MapsFragment : Fragment() {
             if (isClick){
                 workMaps.clearMap()
                 model.geoLiveData.removeObserver(observer)
-
+                binding.outline.visibility = View.INVISIBLE
             }else{
                 if(model.geoLiveData.value == null) model.startEcoMap()
                 model.geoLiveData.observe( viewLifecycleOwner, observer )
+                binding.outline.visibility = View.VISIBLE
             }
             isClick = !isClick
         }

@@ -81,17 +81,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="@+id/layers"
+            app:layout_constraintStart_toStartOf="@+id/layers"
             app:layout_constraintTop_toBottomOf="@+id/layers">
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/outline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/circle" />
+                android:src="@drawable/circle"
+                android:visibility="invisible" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/logoEcoMap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

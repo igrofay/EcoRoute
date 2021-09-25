@@ -11,7 +11,7 @@
         <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/drawable/ic_logo.xml" value="0.3828125" />
         <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_bottom_data_street.xml" value="0.28306159420289856" />
         <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.25" />
-        <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_maps.xml" value="0.48922863099374564" />
+        <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_maps.xml" value="0.16" />
       </map>
     </option>
   </component>
@@ -20,5 +20,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.16" />
+      </ProjectState>
+    </option>
   </component>
 </project>

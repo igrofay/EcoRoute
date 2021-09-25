@@ -21,6 +21,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+
         android:theme="@style/Theme.EcoRoute">
 
         <meta-data
@@ -28,6 +29,9 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:screenOrientation="portrait"
+            android:orientation="horizontal"
+
             android:name=".feature.main.MainActivity"
             android:exported="true">
             <intent-filter>
