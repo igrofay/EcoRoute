@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_bottom_sheet"
+    app:startDestination="@id/dataStreetFragment">
+
+    <fragment
+        android:id="@+id/dataStreetFragment"
+        android:name="com.eco.route.feature.bottom.DataStreetFragment"
+        android:label="DataStreetFragment" />
+</navigation>

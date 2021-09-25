@@ -49,9 +49,9 @@ class MapsFragment : Fragment() {
         }else{
             startMap()
         }
-        binding.button2.setOnClickListener {
-            model.startEcoMap()
-        }
+//        binding.button2.setOnClickListener {
+//            model.startEcoMap()
+//        }
     }
 
     private fun startMap(){
