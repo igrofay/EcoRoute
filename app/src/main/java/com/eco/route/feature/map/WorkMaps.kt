@@ -19,28 +19,29 @@ import com.google.maps.android.heatmaps.Gradient
 import com.google.maps.android.heatmaps.HeatmapTileProvider
 
 class WorkMaps(context: Context) : OnMapReadyCallback {
-    private lateinit var googleMap: GoogleMap
+    private var googleMap: GoogleMap? =null
     override fun onMapReady(gMap: GoogleMap) {
         googleMap = gMap
-        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(appContext , R.raw.style_json))
-        googleMap.uiSettings.isCompassEnabled = true
-        googleMap.isBuildingsEnabled = true
+        googleMap?.run {
+            setMapStyle(MapStyleOptions.loadRawResourceStyle(appContext , R.raw.style_json))
+            uiSettings.isCompassEnabled = true
+            isBuildingsEnabled = true
+        }
 
         val poiListener = GoogleMap.OnPoiClickListener {
             showToast(it.name)
         }
-
-        val markerListener = GoogleMap.OnMarkerClickListener {
-            it.remove()
-            return@OnMarkerClickListener true
+        googleMap?.run {
+            val markerListener = GoogleMap.OnMarkerClickListener {
+                it.remove()
+                return@OnMarkerClickListener true
+            }
+            setOnPoiClickListener(poiListener)
+            setOnMarkerClickListener(markerListener)
+            setOnMapLongClickListener {
+            }
         }
 
-        googleMap.setOnPoiClickListener(poiListener)
-        googleMap.setOnMarkerClickListener(markerListener)
-
-        googleMap.setOnMapLongClickListener {
-
-        }
 
 
 
@@ -55,8 +56,8 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
         circleOptions.fillColor(  Color.parseColor("#7FFF0000"))
         circleOptions.strokeColor(Color.TRANSPARENT)
         circleOptions.strokeWidth(0f)
-        googleMap.addCircle(circleOptions)
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(seattle))
+        googleMap?.addCircle(circleOptions)
+        googleMap?.moveCamera(CameraUpdateFactory.newLatLng(seattle))
     }
 
     fun addHeatmap() {
@@ -85,7 +86,7 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
 
 
 
-        val overlay = googleMap.addTileOverlay(TileOverlayOptions().tileProvider(provider))
+        val overlay = googleMap?.addTileOverlay(TileOverlayOptions().tileProvider(provider))
 
         moveCamera(seattle)
 
@@ -131,8 +132,8 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
     }
 
     fun moveCamera(latLng: LatLng) {
-        googleMap.moveCamera(CameraUpdateFactory.zoomTo(10F))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng))
+        googleMap?.moveCamera(CameraUpdateFactory.zoomTo(10F))
+        googleMap?.animateCamera(CameraUpdateFactory.newLatLng(latLng))
     }
 
 //    fun addPolyLine(markers: List<PlaceObject>) {
@@ -163,10 +164,10 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
         plo.strokeColor(Color.parseColor("#00000000"))
         plo.clickable(true)
 
-        var polygon = googleMap.addPolygon(plo)
-        polygon.tag = "111"
+        val polygon = googleMap?.addPolygon(plo)
+        polygon?.tag = zone.street
 
-        googleMap.setOnPolygonClickListener {
+        googleMap?.setOnPolygonClickListener {
             showToast(it.id)
         }
 
