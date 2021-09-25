@@ -1,15 +1,15 @@
 package com.eco.route.feature.map
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
-import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.eco.route.R
-import com.eco.route.feature.app.App
+import com.eco.route.data.Zone
+import com.eco.route.feature.app.App.Companion.appContext
 import com.eco.route.feature.app.showToast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -18,11 +18,11 @@ import com.google.android.gms.maps.model.*
 import com.google.maps.android.heatmaps.Gradient
 import com.google.maps.android.heatmaps.HeatmapTileProvider
 
-class WorkMaps : OnMapReadyCallback {
+class WorkMaps(context: Context) : OnMapReadyCallback {
     private lateinit var googleMap: GoogleMap
     override fun onMapReady(gMap: GoogleMap) {
         googleMap = gMap
-        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(App.appContext , R.raw.style_json))
+        googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(appContext , R.raw.style_json))
         googleMap.uiSettings.isCompassEnabled = true
         googleMap.isBuildingsEnabled = true
 
@@ -38,9 +38,11 @@ class WorkMaps : OnMapReadyCallback {
         googleMap.setOnPoiClickListener(poiListener)
         googleMap.setOnMarkerClickListener(markerListener)
 
-        addCircle()
-        addHeatmap()
-        addPolygon()
+        googleMap.setOnMapLongClickListener {
+
+        }
+
+
 
     }
 
@@ -80,6 +82,7 @@ class WorkMaps : OnMapReadyCallback {
             .gradient(gradient)
             .maxIntensity(0.0)
             .build()
+
 
 
         val overlay = googleMap.addTileOverlay(TileOverlayOptions().tileProvider(provider))
@@ -146,24 +149,26 @@ class WorkMaps : OnMapReadyCallback {
 //        googleMap.addPolyline(plo)
 //    }
 
-    fun addPolygon() {
+    fun addPolygon(zone: Zone) {
 
         var plo = PolygonOptions()
 //            googleMap.clear()
 //            createNewMarkers(listMutant)
 
-        val issaquah = LatLng(47.5301011, -122.0326191)
-        val seattle = LatLng(47.6062095, -122.3320708)
-        val bellevue = LatLng(47.6101497, -122.2015159)
-        val sammamish = LatLng(47.6162683, -122.0355736)
-        val redmond = LatLng(47.6739881, -122.121512)
+        zone.sensors.forEach {
+            plo.add(LatLng(it[0], it[1]))
+        }
 
-        plo.add(issaquah, sammamish, redmond, seattle)
         plo.fillColor(Color.parseColor("#7FFF0000"))
         plo.strokeColor(Color.parseColor("#00000000"))
-        googleMap.addPolygon(plo)
+        plo.clickable(true)
 
-        moveCamera(redmond)
+        var polygon = googleMap.addPolygon(plo)
+        polygon.tag = "111"
+
+        googleMap.setOnPolygonClickListener {
+            showToast(it.id)
+        }
 
     }
 

@@ -8,9 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import com.eco.route.R
@@ -24,6 +22,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
 class MapsFragment : Fragment() {
+    private val workMaps by lazy { WorkMaps(requireContext()) }
     private val model: MapViewModel by activityViewModels()
     private lateinit var binding: FragmentMapsBinding
     override fun onCreateView(
@@ -31,8 +30,7 @@ class MapsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMapsBinding.inflate(inflater, container, false)
-        return binding.root
+        return inflater.inflate(R.layout.fragment_maps, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,14 +48,16 @@ class MapsFragment : Fragment() {
         }else{
             startMap()
         }
-
     }
-
-
 
     private fun startMap(){
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment?.getMapAsync(WorkMaps())
+        mapFragment?.getMapAsync(workMaps)
+        model.geoLiveData.observe( viewLifecycleOwner ){ it ->
+            it.forEach{
+                workMaps.addPolygon(it)
+            }
+        }
     }
 
     private val requestPermissionLauncher =
