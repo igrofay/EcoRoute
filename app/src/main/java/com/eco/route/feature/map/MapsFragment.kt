@@ -12,12 +12,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import com.eco.route.R
+import com.eco.route.data.Zone
 import com.eco.route.databinding.FragmentMapsBinding
 import com.eco.route.feature.app.App
 import com.eco.route.feature.app.showToast
-
+import androidx.lifecycle.Observer
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
 
@@ -25,6 +25,14 @@ class MapsFragment : Fragment() {
     private val workMaps by lazy { WorkMaps(requireContext()) }
     private val model: MapViewModel by activityViewModels()
     private lateinit var binding: FragmentMapsBinding
+    private var  isClick = false
+    private val observer = Observer<List<Zone>>{
+            it->
+        it.forEach{
+            workMaps.addHeatmap(it)
+            workMaps.addCircle(it)
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -49,19 +57,23 @@ class MapsFragment : Fragment() {
         }else{
             startMap()
         }
-//        binding.button2.setOnClickListener {
-//            model.startEcoMap()
-//        }
+        binding.ecoMapBtn.setOnClickListener {
+            if (isClick){
+                workMaps.clearMap()
+                model.geoLiveData.removeObserver(observer)
+
+            }else{
+                if(model.geoLiveData.value == null) model.startEcoMap()
+                model.geoLiveData.observe( viewLifecycleOwner, observer )
+            }
+            isClick = !isClick
+        }
     }
 
     private fun startMap(){
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(workMaps)
-        model.geoLiveData.observe( viewLifecycleOwner ){ it ->
-            it.forEach{
-                workMaps.addPolygon(it)
-            }
-        }
+
     }
 
     private val requestPermissionLauncher =

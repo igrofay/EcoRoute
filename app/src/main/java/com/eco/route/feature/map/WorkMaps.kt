@@ -7,6 +7,7 @@ import android.graphics.Color
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.alpha
 import com.eco.route.R
 import com.eco.route.data.Zone
 import com.eco.route.feature.app.App.Companion.appContext
@@ -17,6 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.*
 import com.google.maps.android.heatmaps.Gradient
 import com.google.maps.android.heatmaps.HeatmapTileProvider
+import kotlin.math.sign
 
 class WorkMaps(context: Context) : OnMapReadyCallback {
     private var googleMap: GoogleMap? =null
@@ -31,14 +33,16 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
         val poiListener = GoogleMap.OnPoiClickListener {
             showToast(it.name)
         }
+
+
         googleMap?.run {
             val markerListener = GoogleMap.OnMarkerClickListener {
                 it.remove()
                 return@OnMarkerClickListener true
             }
-            setOnPoiClickListener(poiListener)
-            setOnMarkerClickListener(markerListener)
-            setOnMapLongClickListener {
+//            setOnPoiClickListener(poiListener)
+            setOnCircleClickListener {
+                showToast(it.tag.toString())
             }
         }
 
@@ -48,32 +52,37 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
     }
 
     // рисует круг
-    fun addCircle() {
-        val seattle = LatLng(47.6062095, -122.3320708)
-        val circleOptions = CircleOptions()
-        circleOptions.center(seattle)
-        circleOptions.radius(8500.0)
-        circleOptions.fillColor(  Color.parseColor("#7FFF0000"))
-        circleOptions.strokeColor(Color.TRANSPARENT)
-        circleOptions.strokeWidth(0f)
-        googleMap?.addCircle(circleOptions)
-        googleMap?.moveCamera(CameraUpdateFactory.newLatLng(seattle))
+    fun addCircle(zone: Zone) {
+        zone.sensors.forEach {
+            googleMap?.addCircle(
+                CircleOptions()
+                    .center(LatLng(it[0], it[1]))
+                    .radius(3000.0)
+                    .fillColor(  Color.parseColor("#CCFF0000"))
+                    .strokeColor(Color.TRANSPARENT)
+                    .strokeWidth(0f)
+                    .clickable(true)
+            )?.tag = zone.street
+        }
     }
 
-    fun addHeatmap() {
-        val issaquah = LatLng(47.5301011, -122.0326191)
-        val seattle = LatLng(47.6062095, -122.3320708)
-        val bellevue = LatLng(47.6101497, -122.2015159)
-        val sammamish = LatLng(47.6162683, -122.0355736)
-        val redmond = LatLng(47.6739881, -122.121512)
+    fun clearMap() {
+        googleMap?.clear()
+    }
 
-        var latLngs = listOf<LatLng>(issaquah, redmond, sammamish, bellevue, seattle)
+    fun addHeatmap(zone: Zone) {
+
+        var latLngs = mutableListOf<LatLng>()
+
+        zone.sensors.forEach {
+            latLngs += LatLng(it[0], it[1])
+        }
 
         val colors = intArrayOf(
-            Color.rgb(255, 0, 0),  // green
-            Color.rgb(255, 0, 0) // red
+            checkLevelContamination(zone.contaminationLevel),
+            checkLevelContamination(zone.contaminationLevel)
         )
-        val startPoints = floatArrayOf(0.2f, 1f)
+        val startPoints = floatArrayOf(0.1f, 1f)
         val gradient = Gradient(colors, startPoints)
 
         val provider = HeatmapTileProvider.Builder()
@@ -84,11 +93,7 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
             .maxIntensity(0.0)
             .build()
 
-
-
         val overlay = googleMap?.addTileOverlay(TileOverlayOptions().tileProvider(provider))
-
-        moveCamera(seattle)
 
     }
 
@@ -158,9 +163,10 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
 
         zone.sensors.forEach {
             plo.add(LatLng(it[0], it[1]))
+
         }
 
-        plo.fillColor(Color.parseColor("#7FFF0000"))
+        plo.fillColor(checkLevelContamination(zone.contaminationLevel))
         plo.strokeColor(Color.parseColor("#00000000"))
         plo.clickable(true)
 
@@ -168,8 +174,21 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
         polygon?.tag = zone.street
 
         googleMap?.setOnPolygonClickListener {
-            showToast(it.id)
+            showToast(it.tag.toString())
         }
+
+    }
+
+    private fun checkLevelContamination(level: Double) : Int {
+        val color = when {
+            level<51 -> Color.parseColor("#2f00ff00")
+            level<101 -> Color.parseColor("#2fffff00")
+            level < 151 -> Color.parseColor("#2fFF8C00")
+            level < 201 -> Color.parseColor("#2fdc143c")
+            level < 300 -> Color.parseColor("#2f8b00ff")
+            else -> Color.parseColor("#2fb00000")
+        }
+        return color
 
     }
 
