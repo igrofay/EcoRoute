@@ -18,7 +18,7 @@ import com.eco.route.databinding.FragmentMapsBinding
 import com.eco.route.feature.app.App
 import com.eco.route.feature.app.showToast
 import androidx.lifecycle.Observer
-import com.eco.route.feature.bottom.setBehavior
+import com.eco.route.feature.sheet.setBehavior
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 

@@ -22,7 +22,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView3"
-        android:name="com.eco.route.feature.bottom.DataStreetFragment"
+        android:name="com.eco.route.feature.sheet.DataStreetFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/dataStreetFragment"
-        android:name="com.eco.route.feature.bottom.DataStreetFragment"
+        android:name="com.eco.route.feature.sheet.DataStreetFragment"
         android:label="DataStreetFragment" />
 </navigation>
