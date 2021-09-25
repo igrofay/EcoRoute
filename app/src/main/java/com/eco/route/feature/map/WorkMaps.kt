@@ -57,8 +57,8 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
             googleMap?.addCircle(
                 CircleOptions()
                     .center(LatLng(it[0], it[1]))
-                    .radius(3000.0)
-                    .fillColor(  Color.parseColor("#CCFF0000"))
+                    .radius(1000.0)
+                    .fillColor(  Color.parseColor("#00FF0000"))
                     .strokeColor(Color.TRANSPARENT)
                     .strokeWidth(0f)
                     .clickable(true)
@@ -87,8 +87,8 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
 
         val provider = HeatmapTileProvider.Builder()
             .data(latLngs)
-            .radius(50)
-            .opacity(0.5)
+            .radius(40)
+            .opacity(0.6)
             .gradient(gradient)
             .maxIntensity(0.0)
             .build()
