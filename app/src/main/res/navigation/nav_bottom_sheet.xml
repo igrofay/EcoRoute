@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_bottom_sheet"
     app:startDestination="@id/dataStreetFragment">
 
     <fragment
+        android:id="@+id/ecoRouteFragment"
+        android:name="com.eco.route.feature.sheet.EcoRouteFragment"
+        android:label="fragment_eco_route"
+        tools:layout="@layout/fragment_eco_route" />
+    <fragment
         android:id="@+id/dataStreetFragment"
-        android:name="com.eco.route.feature.bottom.DataStreetFragment"
-        android:label="DataStreetFragment" />
+        android:name="com.eco.route.feature.sheet.DataStreetFragment"
+        android:label="fragment_bottom_data_street"
+        tools:layout="@layout/fragment_bottom_data_street" />
 </navigation>

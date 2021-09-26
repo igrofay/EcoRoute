@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
@@ -17,8 +18,9 @@ import com.eco.route.databinding.FragmentMapsBinding
 import com.eco.route.feature.app.App
 import com.eco.route.feature.app.showToast
 import androidx.lifecycle.Observer
+import com.eco.route.feature.sheet.setBehavior
 import com.google.android.gms.maps.SupportMapFragment
-
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
 class MapsFragment : Fragment() {
@@ -44,6 +46,7 @@ class MapsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        BottomSheetBehavior.from<LinearLayout>(view.findViewById(R.id.bottomSheet)).setBehavior(binding.containerView)
         if (ActivityCompat.checkSelfPermission(
                 App.appContext,
                 Manifest.permission.ACCESS_FINE_LOCATION

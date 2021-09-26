@@ -1,5 +1,10 @@
 package com.eco.route.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+
+@Parcelize
 data class Values (
     val  temperature:Double,
     val humidity: Double,
@@ -11,5 +16,5 @@ data class Values (
     val pressure: Double,
     val aqi:Double,
     val formaldehyde:Double
-        )
+        ) : Parcelable
 
