@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,8 +32,10 @@ class MapsFragment : Fragment() {
     private val observer = Observer<List<Zone>>{
             it->
         it.forEach{
-            workMaps.addHeatmap(it)
-            workMaps.addCircle(it)
+            Handler().post {
+                workMaps.addHeatmap(it)
+                workMaps.addCircle(it)
+            }
         }
     }
     override fun onCreateView(
