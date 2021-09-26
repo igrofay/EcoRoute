@@ -8,6 +8,18 @@
     ]
   },
   {
+    "featureType": "poi.park",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#93ff8f"
+      },
+      {
+        "saturation": 100
+      }
+    ]
+  },
+  {
     "featureType": "road",
     "elementType": "labels.icon",
     "stylers": [
@@ -38,7 +50,7 @@
     "elementType": "labels",
     "stylers": [
       {
-        "visibility": "on"
+        "visibility": "off"
       }
     ]
   }

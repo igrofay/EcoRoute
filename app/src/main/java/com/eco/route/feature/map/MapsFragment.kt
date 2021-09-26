@@ -102,6 +102,11 @@ class MapsFragment : Fragment() {
             }
             isClick = !isClick
         }
+
+        binding.geolocation.setOnClickListener {
+            workMaps.moveCameraOnLocation()
+        }
+
     }
 
     private fun startMap(){

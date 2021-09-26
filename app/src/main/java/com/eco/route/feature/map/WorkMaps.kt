@@ -10,8 +10,10 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.alpha
 import com.eco.route.R
 import com.eco.route.data.Zone
+import com.eco.route.feature.app.App
 import com.eco.route.feature.app.App.Companion.appContext
 import com.eco.route.feature.app.showToast
+import com.eco.route.feature.services.GPSTracker
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -24,12 +26,14 @@ class WorkMaps(context: Context,
                private val clickONStreet: (street: String)->Unit ) : OnMapReadyCallback {
     private var googleMap: GoogleMap? =null
     private val moscow = LatLng(55.75,37.6)
+    private var gpsTracker = GPSTracker(context)
+
 
     override fun onMapReady(gMap: GoogleMap) {
         googleMap = gMap
         googleMap?.run {
-            setMapStyle(MapStyleOptions.loadRawResourceStyle(appContext , R.raw.style_json))
-            uiSettings.isCompassEnabled = true
+            setMapStyle(MapStyleOptions.loadRawResourceStyle(App.appContext, R.raw.style_json_eco_map_on))
+            uiSettings.isCompassEnabled = false
             isBuildingsEnabled = true
 
         }
@@ -42,19 +46,16 @@ class WorkMaps(context: Context,
 
 
         googleMap?.run {
-            val markerListener = GoogleMap.OnMarkerClickListener {
-                it.remove()
-                return@OnMarkerClickListener true
-            }
-//            setOnPoiClickListener(poiListener)
             setOnCircleClickListener {
                 clickONStreet(it.tag.toString())
             }
         }
+    }
 
-
-
-
+    fun moveCameraOnLocation() {
+        val pos = LatLng(gpsTracker.latitude, gpsTracker.longitude)
+        googleMap?.moveCamera(CameraUpdateFactory.zoomTo(10F));
+        googleMap?.animateCamera(CameraUpdateFactory.newLatLng(pos))
     }
 
     // рисует круг
@@ -95,11 +96,14 @@ class WorkMaps(context: Context,
             .data(latLngs)
             .radius(40)
             .opacity(0.6)
-            .gradient(gradient)
+            .gradient(Gradient(intArrayOf(
+                checkLevelContamination(zone.contaminationLevel),
+                checkLevelContamination(zone.contaminationLevel)
+            ), floatArrayOf(0.1f, 1f)))
             .maxIntensity(0.0)
             .build()
 
-        val overlay = googleMap?.addTileOverlay(TileOverlayOptions().tileProvider(provider))
+        val overlay = googleMap?.addTileOverlay(TileOverlayOptions().fadeIn(false).tileProvider(provider))
 
     }
 
@@ -188,7 +192,7 @@ class WorkMaps(context: Context,
     private fun checkLevelContamination(level: Double) : Int {
         val color = when {
             level<51 -> Color.parseColor("#2f00ff00")
-            level<101 -> Color.parseColor("#2fffff00")
+            level<101 -> Color.parseColor("#3fffff00")
             level < 151 -> Color.parseColor("#2fFF8C00")
             level < 201 -> Color.parseColor("#2fdc143c")
             level < 300 -> Color.parseColor("#2f8b00ff")
