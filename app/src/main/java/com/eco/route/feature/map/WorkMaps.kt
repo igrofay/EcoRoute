@@ -199,7 +199,6 @@ class WorkMaps(context: Context,
             else -> Color.parseColor("#2fb00000")
         }
         return color
-
     }
 
 

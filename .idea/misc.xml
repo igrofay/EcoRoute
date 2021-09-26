@@ -3,16 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/AndroidSrudioProjects/EcoRoute/app/src/main/res/layout/fragment_bottom_data_street.xml" value="0.18432971014492755" />
+        <entry key="..\:/AndroidSrudioProjects/EcoRoute/app/src/main/res/layout/fragment_maps.xml" value="0.18432971014492755" />
         <entry key="..\:/Users/igrof/AndroidStudioProjects/Ecoroute/app/src/main/res/layout/activity_main.xml" value="0.13272543059777103" />
         <entry key="..\:/Users/igrof/AndroidStudioProjects/Ecoroute/app/src/main/res/layout/activity_welcome.xml" value="0.13272543059777103" />
         <entry key="..\:/Users/igrof/AndroidStudioProjects/Ecoroute/app/src/main/res/layout/fragment_maps.xml" value="0.12588652482269502" />
         <entry key="..\:/Users/igrof/AndroidStudioProjects/Ecoroute/app/src/main/res/layout/fragment_welcome.xml" value="0.13272543059777103" />
         <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/drawable/circle.xml" value="0.3828125" />
         <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/drawable/ic_logo.xml" value="0.3828125" />
-        <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_blank.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_bottom_data_street.xml" value="0.28306159420289856" />
         <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_bottom_sheet.xml" value="0.25" />
-        <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_eco_route.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/nikitin.sa1265/StudioProjects/EcoRoute/app/src/main/res/layout/fragment_maps.xml" value="0.16" />
       </map>
     </option>
