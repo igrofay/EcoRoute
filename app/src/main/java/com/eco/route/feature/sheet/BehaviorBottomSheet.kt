@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.NavHost
 import androidx.navigation.fragment.NavHostFragment
 import com.eco.route.R
@@ -20,18 +21,18 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.*
 
 
 
+
 fun BottomSheetBehavior<LinearLayout>.setStandardBehavior(subscriber:View){
 
     isFitToContents = false
     isGestureInsetBottomIgnored = true
     halfExpandedRatio = 0.25f
-    addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback(){
+    val standardBottomSheetCallback = object: BottomSheetBehavior.BottomSheetCallback(){
         override fun onStateChanged(bottomSheet: View, newState: Int) {
 
             when(newState){
                 STATE_COLLAPSED->{
                     subscriber.translationY = 0.0f
-                    subscriber.parentForAccessibility
                 }
                 STATE_HALF_EXPANDED -> {
                     subscriber.translationY = subscriber.marginBottom/2 - (bottomSheet.parent as View).height * halfExpandedRatio
@@ -42,15 +43,14 @@ fun BottomSheetBehavior<LinearLayout>.setStandardBehavior(subscriber:View){
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
         }
 
-    })
+    }
+    addBottomSheetCallback(standardBottomSheetCallback)
 }
 
 
 fun BottomSheetBehavior<LinearLayout>.openDataStreet(dataStreet: DataStreet, fragment: NavHostFragment){
     state = STATE_EXPANDED
-    NavHostFragment.findNavController(
-        fragment
-    ).navigate(R.id.dataStreetFragment ,
+    NavHostFragment.findNavController(fragment).navigate(R.id.dataStreetFragment ,
         Bundle().apply {
             putParcelable(KEY_STREET , dataStreet)
         })

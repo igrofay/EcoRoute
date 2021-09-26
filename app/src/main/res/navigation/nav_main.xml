@@ -11,8 +11,8 @@
         android:label="fragment_maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
-        android:id="@+id/welcomeFragment"
-        android:name="com.eco.route.feature.welcome.WelcomeFragment"
-        android:label="fragment_welcome"
-        tools:layout="@layout/fragment_welcome" />
+        android:id="@+id/buildRouteFragment"
+        android:name="com.eco.route.feature.buildroute.BuildRouteFragment"
+        android:label="fragment_build_route"
+        tools:layout="@layout/fragment_build_route" />
 </navigation>

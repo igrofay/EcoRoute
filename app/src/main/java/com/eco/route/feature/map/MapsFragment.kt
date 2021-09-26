@@ -34,25 +34,23 @@ import retrofit2.Response
 
 
 class MapsFragment : Fragment() {
+
     private val workMaps by lazy { WorkMaps(requireContext()){
         model.openDataStreet(it).enqueue(object : Callback<DataStreet>{
             override fun onResponse(call: Call<DataStreet>, response: Response<DataStreet>) {
                 response.body()?.let { data ->
                     BottomSheetBehavior.
                     from<LinearLayout>(binding.root.findViewById(R.id.bottomSheet)).openDataStreet(data,
-                        binding.root.findViewById<FragmentContainerView>(R.id.fragmentContainerView)
-                            .getFragment()!!
+                        binding.root.findViewById<FragmentContainerView>(R.id.fragmentContainerView).getFragment()!!
                     )
                 }
             }
-
             override fun onFailure(call: Call<DataStreet>, t: Throwable) {}
 
         })
-
-
-
     } }
+
+
     private val model: MapViewModel by activityViewModels()
     private lateinit var binding: FragmentMapsBinding
     private var  isClick = false
@@ -65,10 +63,8 @@ class MapsFragment : Fragment() {
             }
         }
     }
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMapsBinding.inflate(inflater , container, false)
         return binding.root
@@ -102,12 +98,14 @@ class MapsFragment : Fragment() {
             }
             isClick = !isClick
         }
+        binding.buildRoute.setOnClickListener {
+            NavHostFragment.findNavController(this).navigate(R.id.buildRouteFragment)
+        }
     }
 
     private fun startMap(){
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(workMaps)
-
     }
 
     private val requestPermissionLauncher =
