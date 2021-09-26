@@ -42,10 +42,15 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
         useIR = true
+        freeCompilerArgs += [
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+        ]
     }
     composeOptions {
         kotlinCompilerExtensionVersion compose_version
         kotlinCompilerVersion '1.5.21'
+        kotlinCompilerExtensionVersion = "1.1.0-alpha03"
     }
     packagingOptions {
         resources {

@@ -47,7 +47,6 @@ class BuildRouteFragment : Fragment() {
                     TextField(value = str2 , onValueChange = input2 )
                 }
             }
-
         }
     }
 }
