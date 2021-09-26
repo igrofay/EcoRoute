@@ -22,13 +22,17 @@ import kotlin.math.sign
 
 class WorkMaps(context: Context) : OnMapReadyCallback {
     private var googleMap: GoogleMap? =null
+    private val moscow = LatLng(55.75,37.6)
     override fun onMapReady(gMap: GoogleMap) {
         googleMap = gMap
         googleMap?.run {
             setMapStyle(MapStyleOptions.loadRawResourceStyle(appContext , R.raw.style_json))
             uiSettings.isCompassEnabled = true
             isBuildingsEnabled = true
+
         }
+
+        moveCamera(moscow)
 
         val poiListener = GoogleMap.OnPoiClickListener {
             showToast(it.name)
