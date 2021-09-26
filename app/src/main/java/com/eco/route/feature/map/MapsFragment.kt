@@ -45,12 +45,14 @@ class MapsFragment : Fragment() {
                     )
                 }
             }
+
             override fun onFailure(call: Call<DataStreet>, t: Throwable) {}
 
         })
+
+
+
     } }
-
-
     private val model: MapViewModel by activityViewModels()
     private lateinit var binding: FragmentMapsBinding
     private var  isClick = false
@@ -101,11 +103,17 @@ class MapsFragment : Fragment() {
         binding.buildRoute.setOnClickListener {
             NavHostFragment.findNavController(this).navigate(R.id.buildRouteFragment)
         }
+
+        binding.geolocation.setOnClickListener {
+            workMaps.moveCameraOnLocation()
+        }
+
     }
 
     private fun startMap(){
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(workMaps)
+
     }
 
     private val requestPermissionLauncher =
