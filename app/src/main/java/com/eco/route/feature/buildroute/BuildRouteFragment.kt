@@ -9,6 +9,8 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.painterResource
@@ -23,8 +25,10 @@ class BuildRouteFragment : Fragment() {
     ): View? {
         return ComposeView(requireContext()).apply {
             setContent {
+                var str1 = rememberSaveable { mutableStateOf("") }
+                var str2 = rememberSaveable { mutableStateOf("") }
                 Column {
-                    BarRoute()
+                    BarRoute(str1.value , {str1.value = it} , str2.value , {str2.value = it})
                 }
             }
         }
@@ -39,7 +43,7 @@ class BuildRouteFragment : Fragment() {
                     TextField(value = str1 , onValueChange = input1 )
                 }
                 Row {
-                    Image(painter = painterResource(), contentDescription = )
+                    //Image(painter = painterResource(), contentDescription = )
                     TextField(value = str2 , onValueChange = input2 )
                 }
             }
