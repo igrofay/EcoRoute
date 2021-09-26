@@ -26,6 +26,7 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-light"
         android:text="Москва, Адрес установки датчика"
+        android:textColor="#80000000"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -44,6 +45,7 @@
             android:fontFamily="sans-serif-light"
             android:text="Уровень загрязнения:"
             android:textAlignment="viewStart"
+            android:textColor="#80000000"
             android:textSize="20sp"
             android:textStyle="bold" />
 

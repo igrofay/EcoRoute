@@ -20,9 +20,11 @@ import com.google.maps.android.heatmaps.Gradient
 import com.google.maps.android.heatmaps.HeatmapTileProvider
 import kotlin.math.sign
 
-class WorkMaps(context: Context) : OnMapReadyCallback {
+class WorkMaps(context: Context,
+               private val clickONStreet: (street: String)->Unit ) : OnMapReadyCallback {
     private var googleMap: GoogleMap? =null
     private val moscow = LatLng(55.75,37.6)
+
     override fun onMapReady(gMap: GoogleMap) {
         googleMap = gMap
         googleMap?.run {
@@ -46,7 +48,7 @@ class WorkMaps(context: Context) : OnMapReadyCallback {
             }
 //            setOnPoiClickListener(poiListener)
             setOnCircleClickListener {
-                showToast(it.tag.toString())
+                clickONStreet(it.tag.toString())
             }
         }
 

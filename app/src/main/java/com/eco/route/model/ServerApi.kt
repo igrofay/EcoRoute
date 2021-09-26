@@ -11,5 +11,5 @@ interface ServerApi  {
     @GET("alldata/{page}")
     fun getZones(@Path("page") page : Int) : Call<List<Zone>>
     @GET("street/{name}")
-    fun getStreet(@Path("name") name : String) : Call<Response<DataStreet>>
+    fun getStreet(@Path("name") name : String) : Call<DataStreet>
 }

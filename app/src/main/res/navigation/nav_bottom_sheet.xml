@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_bottom_sheet"
-    app:startDestination="@id/dataStreetFragment">
+    app:startDestination="@id/blankFragment">
 
     <fragment
         android:id="@+id/ecoRouteFragment"
@@ -15,4 +15,9 @@
         android:name="com.eco.route.feature.sheet.DataStreetFragment"
         android:label="fragment_bottom_data_street"
         tools:layout="@layout/fragment_bottom_data_street" />
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.eco.route.feature.sheet.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" />
 </navigation>
